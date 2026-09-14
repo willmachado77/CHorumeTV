@@ -1,0 +1,26 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.11
+    container_name: chorumetv-jellyfin
+    user: "1000:989"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    ports:
+      - "127.0.0.1:8096:8096/tcp"
+    volumes:
+      - /srv/chorumetv/appdata/jellyfin/config:/config
+      - /srv/chorumetv/appdata/jellyfin/cache:/cache
+      - /srv/chorumetv/data/media/filmes:/media/filmes:ro
+      - /srv/chorumetv/data/media/series:/media/series:ro
+      - /srv/chorumetv/data/media/musicas:/media/musicas:ro
+      - /srv/chorumetv/data/media/audiolivros:/media/audiolivros:ro
+    networks:
+      - chorumetv_backend
+
+networks:
+  chorumetv_backend:
+    external: true
+    name: chorumetv_backend
