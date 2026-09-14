@@ -1,0 +1,9 @@
+# Segredos e estado local
+.env
+.env.*
+!.env.example
+data/
+config/
+backups/
+logs/
+.DS_Store
